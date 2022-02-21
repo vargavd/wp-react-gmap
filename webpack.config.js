@@ -1,23 +1,13 @@
-const path = require("path");
-const webpack = require("webpack");
 
+const path = require('path');
 module.exports = {
-  mode: 'development',
-  entry: "./src/index.js",
-  output: {
-    filename: "bundle.js",
-    path: path.resolve("dist")
-  },
+  entry: './src/index.tsx',
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.tsx?$/,
+        use: 'ts-loader',
         exclude: /node_modules/,
-        use: "babel-loader"
-      },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.scss$/,
@@ -29,8 +19,11 @@ module.exports = {
       },
     ],
   },
-  watch: true,
-  watchOptions: {
-    ignored: /node_modules/,
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
-}
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
