@@ -1,10 +1,20 @@
 
+require("dotenv").config({});
+
 const path = require('path');
 module.exports = {
   entry: './src/index.tsx',
   mode: "development",
   module: {
     rules: [
+      {
+        test: /\.(tsx|ts|js)$/,
+        loader: "string-replace-loader",
+        options: {
+          search: /GOOGLE_MAPS_API_KEY/g,
+          replace: process.env.GOOGLE_MAPS_API_KEY,
+        },
+      },
       {
         test: /\.tsx?$/,
         use: 'ts-loader',

@@ -7,7 +7,6 @@ import { Wrapper as GMapWrapper, Status } from "@googlemaps/react-wrapper";
 // custom components
 import Map from "./Map";
 
-import { GOOGLE_MAP_API_KEY } from "../sensitive";
 
 const App = () => {
   // helper funcs
@@ -20,7 +19,7 @@ const App = () => {
   };
 
   return (
-    <GMapWrapper apiKey={GOOGLE_MAP_API_KEY} render={renderGMapWrapperStatus}>
+    <GMapWrapper apiKey={"GOOGLE_MAPS_API_KEY"} render={renderGMapWrapperStatus}>
       <Map />
     </GMapWrapper>
   );
