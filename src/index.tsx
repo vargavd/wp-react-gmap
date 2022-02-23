@@ -8,9 +8,4 @@ import "./styles.scss";
 // main component
 import App from './components/App';
 
-ReactDOM.render(
-  <div>
-    <h1>Hello, Welcome to React and TypeScript 000</h1>
-    <App />
-  </div>, 
-  document.getElementById('wprg-root'));
+ReactDOM.render(<App />, document.getElementById('wprg-root'));
