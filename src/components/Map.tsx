@@ -1,6 +1,9 @@
 // react imports
 import * as React from "react";
 
+// assets
+import markerIcon from "../imgs/map-marker-point.png";
+
 /**
  * props:
  * @returns 
@@ -145,7 +148,8 @@ const Map = () => {
       google.maps.event.addDomListener(map, 'click', (e: google.maps.MapMouseEvent) => {
         new google.maps.Marker({
           map,
-          position: e.latLng
+          position: e.latLng,
+          icon: markerIcon,
         });
       });
     }

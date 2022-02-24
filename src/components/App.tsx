@@ -5,6 +5,7 @@ import * as React from "react";
 import { Wrapper as GMapWrapper, Status } from "@googlemaps/react-wrapper";
 
 // custom components
+import Header from "./header/Header";
 import Map from "./Map";
 
 
@@ -19,9 +20,12 @@ const App = () => {
   };
 
   return (
-    <GMapWrapper apiKey={"GOOGLE_MAPS_API_KEY"} render={renderGMapWrapperStatus}>
-      <Map />
-    </GMapWrapper>
+    <>
+      <Header />
+      <GMapWrapper apiKey={"GOOGLE_MAPS_API_KEY"} render={renderGMapWrapperStatus}>
+        <Map />
+      </GMapWrapper>
+    </>
   );
 };
 

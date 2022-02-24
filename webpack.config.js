@@ -8,6 +8,12 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.png$/,
+        use: {
+          loader: 'url-loader'
+        }
+      },
+      {
         test: /\.(tsx|ts|js)$/,
         loader: "string-replace-loader",
         options: {
