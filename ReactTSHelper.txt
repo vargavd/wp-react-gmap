@@ -1,0 +1,5 @@
+How to use Typescript in a React project?
+- Components: React.FC
+- Props types everywhere (React.FC<CustomPropsType>)
+- hooks<type> - for example useState<string> - we can define the type of state variable
+- DOM event handlers, for example onClick = (event: React.MouseEventHandler<HTMLButtonElement>) => {}

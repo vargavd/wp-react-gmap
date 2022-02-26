@@ -9,7 +9,7 @@ import Header from "./header/Header";
 import Map from "./Map";
 
 
-const App = () => {
+const App: React.FC = () => {
   // helper funcs
   const renderGMapWrapperStatus = (status: Status) => {
     if (status === Status.LOADING) {

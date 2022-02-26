@@ -8,7 +8,7 @@ import markerIcon from "../imgs/map-marker-point.png";
  * props:
  * @returns 
  */
-const Map = () => {
+const Map: React.FC = () => {
   // REFS
   const mapRef = React.useRef<HTMLDivElement>(null);
 

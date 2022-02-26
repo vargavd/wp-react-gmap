@@ -45,7 +45,7 @@ locationInfos.forEach(locationInfo => {
 // #endregion
 
 
-const Header = () => {
+const Header: React.FC = () => {
   console.log(taxonomyATerms, taxonomyBTerms, taxonomyCTerms, taxonomyDTerms);
 
   return (
