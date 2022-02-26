@@ -9,6 +9,11 @@ import Header from "./header/Header";
 import Map from "./Map";
 
 
+// state management
+import { Provider } from "react-redux";
+import { store } from "../store/store";
+
+
 const App: React.FC = () => {
   // helper funcs
   const renderGMapWrapperStatus = (status: Status) => {
@@ -20,12 +25,12 @@ const App: React.FC = () => {
   };
 
   return (
-    <>
+    <Provider store={store}>
       <Header />
       <GMapWrapper apiKey={"GOOGLE_MAPS_API_KEY"} render={renderGMapWrapperStatus}>
         <Map />
       </GMapWrapper>
-    </>
+    </Provider>
   );
 };
 
