@@ -1,8 +1,17 @@
 // react imports
 import * as React from "react";
 
+// state imports
+import { useSelector } from "react-redux";
+
 // assets
 import markerIcon from "../imgs/map-marker-point.png";
+
+// data
+import { locationInfos } from "../data";
+
+// const
+let markers: google.maps.Marker[] = [];
 
 /**
  * props:
@@ -15,7 +24,10 @@ const Map: React.FC = () => {
 
   // STATES
   const [map, setMap] = React.useState<google.maps.Map>();
-
+  const selectedTaxonomyATerms = useSelector((state:any) => state.taxonomyAFilters);
+  const selectedTaxonomyBTerms = useSelector((state:any) => state.taxonomyBFilters);
+  const selectedTaxonomyCTerms = useSelector((state:any) => state.taxonomyCFilters);
+  const selectedTaxonomyDTerms = useSelector((state:any) => state.taxonomyDFilters);
 
   // EFFECT: mapRef mounted -> create map
   React.useEffect(() => {
@@ -142,18 +154,67 @@ const Map: React.FC = () => {
     }
   }, [mapRef]);
 
-  // EFFECT: map initialized -> subscribe click
+  // EFFECT: map initialized -> add all markers
   React.useEffect(() => {
-    if (map) {
-      google.maps.event.addDomListener(map, 'click', (e: google.maps.MapMouseEvent) => {
-        new google.maps.Marker({
-          map,
-          position: e.latLng,
-          icon: markerIcon,
-        });
-      });
+    // ADDING MARKER TO CLICK
+    // if (map) {
+    //   google .maps.event.addDomListener(map, 'click', (e: google.maps.MapMouseEvent) => {
+    //     new google.maps.Marker({
+    //       map,
+    //       position: e.latLng,
+    //       icon: markerIcon,
+    //     });
+    //   });
+    // }
+
+    if (!map) {
+      return;
     }
-  }, [map]);
+
+    markers.forEach(marker => marker.setMap(null));
+
+    markers = [];
+
+    locationInfos.forEach((location) => {
+      if (selectedTaxonomyATerms.length > 0) {
+        for (let i = 0; i < selectedTaxonomyATerms.length; i++) {
+          if (!location.taxonomyATerms.includes(selectedTaxonomyATerms[i])) {
+            return;
+          }
+        }
+      }
+
+      if (selectedTaxonomyBTerms.length > 0) {
+        for (let i = 0; i < selectedTaxonomyBTerms.length; i++) {
+          if (!location.taxonomyBTerms.includes(selectedTaxonomyBTerms[i])) {
+            return;
+          }
+        }
+      }
+
+      if (selectedTaxonomyCTerms.length > 0) {
+        for (let i = 0; i < selectedTaxonomyCTerms.length; i++) {
+          if (!location.taxonomyCTerms.includes(selectedTaxonomyCTerms[i])) {
+            return;
+          }
+        }
+      }
+
+      if (selectedTaxonomyDTerms.length > 0) {
+        for (let i = 0; i < selectedTaxonomyDTerms.length; i++) {
+          if (!location.taxonomyDTerms.includes(selectedTaxonomyDTerms[i])) {
+            return;
+          }
+        }
+      }
+
+      markers.push(new google.maps.Marker({
+        map,
+        position: { lat: location.lat, lng: location.lng },
+        icon: markerIcon,
+      }));
+    });
+  }, [map, selectedTaxonomyATerms, selectedTaxonomyBTerms, selectedTaxonomyCTerms, selectedTaxonomyDTerms]);
 
 
   return <div ref={mapRef} style={{ height: "100%" }} />;
